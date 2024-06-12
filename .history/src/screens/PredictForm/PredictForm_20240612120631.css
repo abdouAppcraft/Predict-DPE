@@ -1,0 +1,118 @@
+:root{
+    --primary-color: #4CAF50;
+    --background-color: #f4f4f9;
+    --border-color: #ccc;
+    --text-color: #333;
+    --text-light-color: white;
+    --box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    --border-radius: 10px;
+    --padding: 10px;
+    --font-family: Arial, sans-serif;
+    --gap: 1rem;
+    --transition: background-color 0.3s ease;
+}
+
+.predict-form {
+    margin: 0;    
+    background-color: var(--background-color);
+    border-radius: var(--border-radius);
+    box-shadow: var(--box-shadow);
+    font-family: var(--font-family);
+    display: grid;
+    gap: var(--gap);
+    height: 100vh;
+    text-overflow: ellipsis;
+    overflow: hidden;
+
+    @media (max-width:600px) {
+        grid-template-rows: 50% 50%;
+    }
+    
+    @media (min-width:600px) {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    section:first-child {
+        overflow-y: auto;
+        padding: var(--padding);
+    }
+    
+    section:last-child {
+        overflow-y: auto;
+        flex: 1;
+    }
+
+    .result-container {
+        border: solid var(--primary-color);
+        
+        @media (min-width:600px) {
+            margin: var(--gap);
+        }
+    }
+
+    .result-title {
+        padding: var(--padding);
+        background-color: var(--primary-color);
+        color: var(--text-light-color);
+    }
+
+    .result-prediction {
+        padding: var(--padding);
+        display: grid;
+        gap: var(--gap);
+        
+        @media (min-width:1200px) {
+            grid-template-columns: repeat(2, 1fr);
+        }
+    }
+
+    .result-DPE.title {
+        color: teal;
+    }
+    
+    h1 {
+        text-align: center;
+    }
+
+    .form-group {
+        margin-bottom: 15px;
+
+        label {
+            display: block;
+            margin-bottom: 5px;
+            color: var(--text-color);
+        }
+
+        input, select {
+            width: calc(100% - 20px);
+            padding: var(--padding);
+            border: 1px solid var(--border-color);
+            border-radius: 5px;
+            font-size: 16px;
+        }
+    }
+
+    .submit-btn {
+        width: 100%;
+        padding: var(--padding);
+        background-color: var(--primary-color);
+        color: var(--text-light-color);
+        border: none;
+        border-radius: 5px;
+        font-size: 16px;
+        cursor: pointer;
+        transition: var(--transition);
+
+        &:hover {
+            background-color: #45a049;
+        }
+    }
+
+    h2 {
+        text-align: center;
+    }
+}
+
+* {
+    box-sizing: border-box;
+}
