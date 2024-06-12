@@ -12,7 +12,7 @@ export const useDpeOptions = () => {
 
   useEffect(() => {
     axios
-      .get<DPE_Options_Type>(`${process.env.REACT_APP_BASE_URL}/dpe/options`)
+      .get<DPE_Options_Type>(`${process.env.REACT_APP_BASE_URL}`)
       .then((res) => {
         setOptions(res.data);
       });

@@ -70,7 +70,7 @@ const PredictForm: React.FC = () => {
     e.preventDefault();
     try {
       const response = await axios.post<DpeGesType>(
-        process.env.REACT_APP_BASE_URL!,
+        process.env.REACT_APP_BASE_URL,
         computeData(formData)
       );
       // console.log("Prediction Response:", response.data); // Ajoutez ce journal pour voir la réponse
