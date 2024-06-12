@@ -1,0 +1,119 @@
+import React, { useState } from "react";
+import axios from "axios";
+import "./PredictForm.css";
+import { useNavigate } from "react-router-dom";
+
+const PredictForm: React.FC = () => {
+  const [formData, setFormData] = useState({
+    Surface_habitable: "",
+    Annee_construction: "",
+    Type_chauffage: "",
+    Panneaux_solaires: false,
+    Nombre_pieces: "",
+  });
+
+  const [prediction, setPrediction] = useState<string | null>(null);
+  const navigate = useNavigate();
+
+  const handleChange = (
+    e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>
+  ) => {
+    const { name, value, type } = e.target;
+    if (type === "checkbox") {
+      setFormData({
+        ...formData,
+        [name]: (e.target as HTMLInputElement).checked,
+      });
+    } else {
+      setFormData({
+        ...formData,
+        [name]: value,
+      });
+    }
+  };
+
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    console.log("Form Data Submitted:", formData); // Ajoutez ce journal pour voir les données soumises
+    try {
+      // const response = await axios.post(
+      //   "http://localhost:8000/predict/",
+      //   formData
+      // );
+      // console.log("Prediction Response:", response.data); // Ajoutez ce journal pour voir la réponse
+      // setPrediction(response.data.predicted_DPE);
+      navigate("/result");
+    } catch (error) {
+      console.error("There was an error making the request:", error);
+    }
+  };
+
+  return (
+    <div className="predict-form">
+      <h1>Predict DPE</h1>
+      <form onSubmit={handleSubmit}>
+        <div className="form-group">
+          <label>Surface habitable (m²):</label>
+          <input
+            type="number"
+            name="Surface_habitable"
+            value={formData.Surface_habitable}
+            onChange={handleChange}
+            required
+          />
+        </div>
+        <div className="form-group">
+          <label>Année de construction:</label>
+          <input
+            type="number"
+            name="Annee_construction"
+            value={formData.Annee_construction}
+            onChange={handleChange}
+            required
+          />
+        </div>
+        <div className="form-group">
+          <label>Type de chauffage:</label>
+          <select
+            name="Type_chauffage"
+            value={formData.Type_chauffage}
+            onChange={handleChange}
+            required
+          >
+            <option value="">--Choisir--</option>
+            <option value="électrique">Électrique</option>
+            <option value="gaz">Gaz</option>
+            <option value="fioul">Fioul</option>
+            <option value="bois">Bois</option>
+            <option value="autre">Autre</option>
+          </select>
+        </div>
+        <div className="form-group">
+          <label>Panneaux solaires:</label>
+          <input
+            type="checkbox"
+            name="Panneaux_solaires"
+            checked={formData.Panneaux_solaires}
+            onChange={handleChange}
+          />
+        </div>
+        <div className="form-group">
+          <label>Nombre de pièces:</label>
+          <input
+            type="number"
+            name="Nombre_pieces"
+            value={formData.Nombre_pieces}
+            onChange={handleChange}
+            required
+          />
+        </div>
+        <button type="submit" className="submit-btn">
+          Predict
+        </button>
+      </form>
+      {prediction && <h2>Predicted DPE: {prediction}</h2>}
+    </div>
+  );
+};
+
+export default PredictForm;

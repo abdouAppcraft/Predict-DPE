@@ -1,0 +1,6 @@
+/* HTML: <div class="triangle"></div> */
+.triangle {
+    height: 180px;
+    aspect-ratio: cos(30deg);
+    clip-path: polygon(0 0,100% 50%,0 100%);
+  }
